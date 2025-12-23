@@ -1,0 +1,549 @@
+<!--TEMPLATE ALPHA--> 
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITRE_DU_SITE}}</title> <meta name="description" content="Portfolio étudiant ingénieur">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. VARIABLES (Pour ton futur script)
+           Il suffira de changer ces 3 codes hexa.
+        ========================================= */
+        :root {
+            --bg-color: #F0F5FF;       /* Fond général (Bleu très pâle harmonisé) */
+            --text-color: #111111;     /* Texte principal (Presque noir) */
+            --accent-color: #2F54EB;   /* Couleur secondaire (Bleu Profond par défaut) */
+            --card-bg: #FFFFFF;        /* Fond des blocs */
+            --border-color: #E5E5E5;
+        }
+
+        /* =========================================
+           2. BASE & RESET
+        ========================================= */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(rgba(47, 84, 235, 0.15) 1px, transparent 1px);
+            background-size: 15px 15px;
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 40px 20px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        ul { list-style: none; }
+
+        /* Conteneur central style "Page A4" */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           3. HEADER & INTRO
+        ========================================= */
+        header { margin-bottom: 60px; }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .school {
+            font-size: 1rem;
+            color: #555; /* Gris neutre (Contraste augmenté) */
+            margin-bottom: 20px;
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            color: #444;
+            max-width: 800px;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .cv-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border: 1px dashed var(--accent-color);
+            border-radius: 8px;
+            font-weight: 600;
+            background-color: var(--card-bg);
+            background-image: linear-gradient(135deg, rgba(47, 84, 235, 0.02) 0%, rgba(47, 84, 235, 0.08) 100%);
+            background-size: 200% 200%;
+            animation: gradient-flow 6s ease infinite;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .cv-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(47, 84, 235, 0.1);
+        }
+
+        /* =========================================
+           4. TIMELINE (Formation)
+        ========================================= */
+        .timeline-section { margin-bottom: 60px; }
+        .section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .divider-line {
+            width: 100%;
+            height: 1px;
+            background-color: var(--accent-color);
+            opacity: 0.3;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background-color: rgba(47, 84, 235, 0.05);
+        }
+
+        .year {
+            font-weight: 600;
+            min-width: 100px;
+            color: var(--accent-color);
+        }
+
+        .formation-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .formation-details strong { display: block; }
+        .formation-details span { color: #555; font-size: 0.95rem; }
+
+        .specialization {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-top: 5px;
+        }
+        .specialization em {
+            font-style: italic;
+            color: var(--accent-color);
+        }
+        .subjects {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-top: 5px;
+        }
+
+        /* Layout Grid V3 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* =========================================
+           5. BLOCS INTERACTIFS (Projets / Autre)
+        ========================================= */
+        .big-blocks {
+            display: block;
+            height: 100%;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0 0, 0% 50%; }
+            50% { background-position: 0 0, 100% 50%; }
+            100% { background-position: 0 0, 0% 50%; }
+        }
+
+        .block-btn {
+            background-color: var(--card-bg);
+            background-image: linear-gradient(135deg, rgba(47, 84, 235, 0.02) 0%, rgba(47, 84, 235, 0.08) 100%);
+            background-size: 200% 200%;
+            animation: gradient-flow 6s ease infinite;
+            border: 1px dashed var(--accent-color);
+            color: var(--accent-color);
+            padding: 40px 20px;
+            min-height: 300px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .block-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(47, 84, 235, 0.15);
+        }
+
+        .bento-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 15px;
+            fill: var(--accent-color);
+            opacity: 0.8;
+            transition: fill 0.3s;
+        }
+
+        .bento-bg-icon {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            right: -30px;
+            bottom: -30px;
+            fill: var(--accent-color);
+            opacity: 0.03;
+            pointer-events: none;
+            transform: rotate(-15deg);
+        }
+
+        /* =========================================
+           6. MODALES (Pop-ups)
+        ========================================= */
+        dialog {
+            width: 100%;
+            max-width: 800px;
+            height: 90vh; /* Prend presque toute la hauteur */
+            margin: auto;
+            border: none;
+            border-radius: 12px;
+            background: var(--card-bg);
+            padding: 0; /* Padding géré à l'intérieur */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            /* Animation native */
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        dialog[open] {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        .close-btn:hover { color: var(--text-color); }
+
+        .modal-content {
+            padding: 30px;
+            overflow-y: auto; /* Scroll intérieur */
+        }
+
+        /* Liste des projets dans le modal */
+        .year-separator {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+        }
+
+        .project-card {
+            background: #F9F9F9;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .project-card:hover { border-color: var(--border-color); }
+
+        .project-title { font-size: 1.3rem; margin-bottom: 5px; }
+        
+        .project-meta {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .software-tags { margin-bottom: 15px; }
+        .tag {
+            display: inline-block;
+            background: #EAEAEA;
+            color: #333;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-right: 5px;
+            font-weight: 600;
+        }
+
+        .project-desc { margin-bottom: 20px; color: #444; }
+
+        .pdf-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--text-color);
+            color: #FFF;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .pdf-btn:hover { background-color: var(--accent-color); }
+
+        /* =========================================
+           7. FOOTER
+        ========================================= */
+        footer {
+            margin-top: 80px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        footer strong { color: var(--text-color); }
+
+        /* Mobile */
+        @media (max-width: 800px) {
+            .content-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .big-blocks { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+            .timeline-item { flex-direction: column; }
+            .year { margin-bottom: 5px; }
+            footer { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1>{{PRENOM}} {{NOM}}</h1>
+            <p class="subtitle">{{DOMAINE_ETUDE}}</p>
+            <p class="school">{{ECOLE_ACTUELLE}}</p>
+            
+            <div class="bio">
+                <p>{{DESCRIPTION_PROFIL}}</p>
+            </div>
+
+            <a href="cv.pdf" target="_blank" class="cv-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                Voir mon CV (PDF)
+            </a>
+        </header>
+
+        <div class="content-grid">
+        <section id="timeline" class="timeline-section">
+            <div class="divider-line"></div>
+            
+            <div class="timeline-list">
+                <div class="timeline-item">
+                    <div class="year">2023 - 2025</div>
+                    <div class="formation-details">
+                        <strong>Master Ingénierie Mécanique</strong>
+                        <span>INSA Lyon</span>
+                        <p class="specialization">Spécialisation : <em>Cellules Aéronautiques</em></p>
+                        <p class="subjects">Matières : Aérodynamique, Mécanique du vol, Résistance des matériaux, Thermodynamique.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2020 - 2023</div>
+                    <div class="formation-details">
+                        <strong>Licence Sciences de l'Ingénieur</strong>
+                        <span>Université Toulouse III</span>
+                        <p class="specialization">Spécialisation : <em>Ingénierie Mécanique</em></p>
+                        <p class="subjects">Matières : Mathématiques, Physique, Sciences de l'Ingénieur.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interaction">
+            <div class="big-blocks">
+                <div class="block-btn" onclick="openModal('modal-projects')">
+                    <!-- Icone Fond -->
+                    <svg class="bento-bg-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    <!-- Icone Centrale -->
+                    <svg class="bento-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    PROJETS
+                </div>
+            </div>
+        </section>
+        </div>
+
+        <footer>
+            <div class="contact-info">
+                <p>Email : <strong><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></strong></p>
+                <p>LinkedIn : <strong><a href="{{LINKEDIN_URL}}" target="_blank">Voir mon profil</a></strong></p>
+            </div>
+            <div class="legal">
+                <a href="mentions.html" style="text-decoration: underline;">Mentions Légales</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <dialog id="modal-projects">
+        <div class="modal-header">
+            <h2>Mes Projets</h2>
+            <button class="close-btn" onclick="closeModal('modal-projects')">✕</button>
+        </div>
+        <div class="modal-content">
+            
+            <div class="year-group">
+                <h3 class="year-separator">4ème Année</h3>
+                
+                <article class="project-card">
+                    <h4 class="project-title">Conception d'un drone léger</h4>
+                    <p class="project-meta">Réalisé en 2024</p>
+                    
+                    <div class="software-tags">
+                        <span class="tag">SolidWorks</span>
+                        <span class="tag">Ansys</span>
+                        <span class="tag">Matlab</span>
+                    </div>
+
+                    <div class="project-desc">
+                        <p>Étude aérodynamique et conception structurelle d'un drone de surveillance civile. Optimisation de la masse et analyse des contraintes vibratoires.</p>
+                    </div>
+
+                    <a href="images/uploads/projet1.pdf" target="_blank" class="pdf-btn">
+                        📄 Voir le dossier technique (PDF)
+                    </a>
+                </article>
+
+                 <article class="project-card">
+                    <h4 class="project-title">Simulation Flux Thermique</h4>
+                    <p class="project-meta">Réalisé en 2024</p>
+                    <div class="software-tags">
+                        <span class="tag">Comsol</span>
+                    </div>
+                    <div class="project-desc">
+                        <p>Modélisation des échanges thermiques dans un échangeur à plaques.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="year-group">
+                <h3 class="year-separator">3ème Année</h3>
+                
+                <article class="project-card">
+                    <h4 class="project-title">Bras Robotique 3 axes</h4>
+                    <p class="project-meta">Réalisé en 2023</p>
+                    <div class="software-tags">
+                        <span class="tag">Catia V5</span>
+                        <span class="tag">Arduino</span>
+                    </div>
+                    <div class="project-desc">
+                        <p>Conception et prototypage par impression 3D d'un petit bras manipulateur.</p>
+                    </div>
+                    <a href="#" class="pdf-btn">📄 Voir le rapport</a>
+                </article>
+            </div>
+
+        </div>
+    </dialog>
+
+    <dialog id="modal-others">
+        <div class="modal-header">
+            <h2>{{TITRE_AUTRE_CATEGORIE}}</h2>
+            <button class="close-btn" onclick="closeModal('modal-others')">✕</button>
+        </div>
+        <div class="modal-content">
+            <p>Contenu de la catégorie secondaire...</p>
+        </div>
+    </dialog>
+
+    <script>
+        // Logique simple pour ouvrir/fermer les modales
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.showModal(); // Utilise l'API native du navigateur
+            document.body.style.overflow = 'hidden'; // Bloque le scroll arrière-plan
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.close();
+            document.body.style.overflow = ''; // Réactive le scroll
+        }
+
+        // Fermer en cliquant en dehors (sur le backdrop)
+        document.querySelectorAll('dialog').forEach(dialog => {
+            dialog.addEventListener('click', (event) => {
+                if (event.target === dialog) {
+                    dialog.close();
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
